@@ -1,0 +1,30 @@
+server:
+  port: 6060
+spring:
+  datasource:
+    url: jdbc:postgresql://${db.host:localhost}:${db.port:5432}/${db.name:auth}?useSSL=false
+    username: ${db.uid:auth}
+    password: ${db.pwd:auth}
+    driver-class-name: org.postgresql.Driver
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      ddl-auto: update
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+  sql:
+    init:
+      mode: never
+      platform: postgresql
+  redis:
+    host: localhost
+    port: 6379
+check-user-scopes: false
